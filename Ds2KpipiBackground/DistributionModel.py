@@ -63,7 +63,7 @@ parameters_list = [
 # "True" values of the model parameters to be used for generation of the test sample
 #trueCuts = [ Const(0.3), Const(0.6), Const(0.3), Const(3.0), Const(2.0), Const(2.0), Const(0.10), Const(0.20) ]
 true_cuts = [ atfi.const(0.3), atfi.const(0.6), atfi.const(0.3), atfi.const(3.0), 
-              atfi.const(2.0), atfi.const(2.0), atfi.const(0.10), atfi.const(0.20) ]
+              atfi.const(2.0), atfi.const(2.0), atfi.const(0.20), atfi.const(0.40) ]
 
 bounds = { i[0] : (i[2], i[3]) for i in parameters_list }
 

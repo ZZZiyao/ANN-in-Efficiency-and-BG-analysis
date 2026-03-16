@@ -14,8 +14,8 @@ import sys, os
 
 def main() : 
 
-  nev = 1000000
-  outfile = "toy_tuple.root"
+  nev = 4000000
+  outfile = "toy_4e6.root"
 
   atfi.set_seed(nev+1)
 
