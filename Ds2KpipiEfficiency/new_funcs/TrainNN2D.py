@@ -16,7 +16,7 @@ from DistributionModel import observables_phase_space, observables_toys, observa
 
 bounds = observables_phase_space.bounds()
 
-data = atfi.const(tfr.read_tuple("eff_toy_4e6.root", observables_toys))
+data = atfi.const(tfr.read_tuple("eff_toy_1e5.root", observables_toys))
 
 tfp.set_lhcb_style(size=9, usetex=False)
 fig, ax = plt.subplots(nrows=len(observables_toys), ncols=len(observables_toys), figsize=(8, 6))
