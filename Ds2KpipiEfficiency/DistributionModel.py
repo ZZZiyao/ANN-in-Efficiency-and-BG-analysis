@@ -176,36 +176,3 @@ def selection_with_random_cuts(sample, rnd) :
     return selection(sample, cuts, rnd[:,5:])
 
 
-def selection_mask(sample, cuts, rnd) :
-    ptcut     = cuts[0]
-    pcut      = cuts[1]
-    d_ptcut   = cuts[2]
-    max_ptcut = cuts[3]
-    sum_ptcut = cuts[4]
-
-    dalitz_sample = dalitz_phase_space.from_square_dalitz_plot(sample[:,0], sample[:,1])
-
-    mom = dalitz_phase_space.final_state_momenta(
-            dalitz_phase_space.m2ac(dalitz_sample),
-            dalitz_phase_space.m2bc(dalitz_sample)
-          )
-
-    mom = generate_rotation_and_boost(mom, md, meanpt, d_ptcut, rnd[:,:])
-
-    sel = atfi.greater(atfk.pt(mom[0]), ptcut)
-    sel = atfi.logical_and(sel, atfi.greater(atfk.pt(mom[1]), ptcut))
-    sel = atfi.logical_and(sel, atfi.greater(atfk.pt(mom[2]), ptcut))
-    sel = atfi.logical_and(sel, atfi.greater(atfk.pt(mom[0]+mom[1]+mom[2]), d_ptcut))
-    sel = atfi.logical_and(sel, atfi.greater(atfk.p(mom[0]), pcut))
-    sel = atfi.logical_and(sel, atfi.greater(atfk.p(mom[1]), pcut))
-    sel = atfi.logical_and(sel, atfi.greater(atfk.p(mom[2]), pcut))
-    sel = atfi.logical_and(sel, atfi.greater(atfi.max(atfi.max(atfk.pt(mom[0]), atfk.pt(mom[1])), atfk.pt(mom[2])), max_ptcut))
-    sel = atfi.logical_and(sel, atfi.greater(atfk.pt(mom[0])+atfk.pt(mom[1])+atfk.pt(mom[2]), sum_ptcut))
-    sel = atfi.logical_and(sel, atfi.greater(atfk.eta(mom[0]), etamin))
-    sel = atfi.logical_and(sel, atfi.greater(atfk.eta(mom[1]), etamin))
-    sel = atfi.logical_and(sel, atfi.greater(atfk.eta(mom[2]), etamin))
-    sel = atfi.logical_and(sel, atfi.less(atfk.eta(mom[0]), etamax))
-    sel = atfi.logical_and(sel, atfi.less(atfk.eta(mom[1]), etamax))
-    sel = atfi.logical_and(sel, atfi.less(atfk.eta(mom[2]), etamax))
-
-    return sel
